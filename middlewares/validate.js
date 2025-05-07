@@ -1,13 +1,13 @@
 const validate = (schema) => {
     return (req, res, next) => {
-      const { error } = schema.validate(req.body, { abortEarly: false });
+      const { error } = schema.validate(req.body, { abortEarly: false })
       if (error) {
         return res.status(400).json({
           errors: error.details.map((detail) => detail.message),
-        });
+        })
       }
-      next();
-    };
-  };
+      next()
+    }
+  }
   
-  module.exports = validate;
+  module.exports = validate
