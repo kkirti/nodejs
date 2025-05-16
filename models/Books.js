@@ -1,8 +1,12 @@
-const mongoose = require('mongoose')
-const BookSchema = new mongoose.Schema({
-    title: {type: String, required: true},
-    author: String,
-    publishedYear: Number
-})
+import mongoose from 'mongoose';
 
-module.exports = mongoose.model('Books', BookSchema)
+const bookSchema = new mongoose.Schema({
+  title: String,
+  author: String,
+  publishedYear: Number
+});
+
+const Book = mongoose.model('Books', bookSchema);
+export default Book;
+
+//sudo systemctl start mongod

@@ -1,25 +1,19 @@
-const express = require('express')
-const BookController = require('../controllers/BookController')
-const validate = require('../middlewares/validate')
-const { createBookSchema, updateBookSchema } = require('../validations/bookValidation')
+import express from 'express';
+import {
+  getAllBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook
+} from '../controllers/BookController.js';
+import { validateBook } from '../middlewares/bookValidation.js';
 
-class BookRoute {
-  constructor() {
-    this.router = express.Router()
-    this.registerRoutes()
-  }
+const router = express.Router();
 
-  registerRoutes() {
-    this.router.post('/books', validate(createBookSchema), BookController.create)
-    this.router.get('/books', BookController.getAll)
-    this.router.get('/books/:id', BookController.getOne)
-    this.router.put('/books/:id', validate(updateBookSchema), BookController.update)
-    this.router.delete('/books/:id', BookController.delete)
-  }
+router.get('/', getAllBooks);
+router.get('/:id', getBookById);
+router.post('/', validateBook, createBook);
+router.put('/:id', validateBook, updateBook);
+router.delete('/:id', deleteBook);
 
-  getRouter() {
-    return this.router
-  }
-}
-
-module.exports = new BookRoute().getRouter()
+export default router;
