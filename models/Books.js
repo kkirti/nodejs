@@ -5,7 +5,7 @@ const bookSchema = new mongoose.Schema({
   author: String,
   publishedYear: Number
 });
-
+bookSchema.index({ title: 'text' })
 const Book = mongoose.model('Books', bookSchema);
 export default Book;
 

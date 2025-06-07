@@ -36,3 +36,12 @@ export const deleteBook = async (req, res) => {
   if (!book) return res.status(404).json({ message: 'Not found' });
   res.json({ message: 'Deleted successfully' });
 };
+
+export const searchBooks = async (req, res) => {
+  try {
+    const results = await Book.find({ $text: { $search: req.query.query } });
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
